@@ -5,6 +5,6 @@ Group Members:
 Adam DeBruler 
 Andres Gomez
 Matthew Cole
-Meghana Bhismani
+Meghana Bhimasani
 Minqiu Yu
 Romy Roballard
