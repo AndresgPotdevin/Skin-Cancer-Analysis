@@ -131,10 +131,11 @@ h2 {
 }
 
 .btn .btn-default {
-  background-color: #6c757d;
+  background-color: #82ad9b!important;
 }
 
 label {
+  background-color: #82ad9b!important;
   color: white;
   font-weight: bold;
 }
