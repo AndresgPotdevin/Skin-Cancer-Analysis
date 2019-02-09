@@ -66,11 +66,8 @@ def upload_file():
     #</form>
     #'''
 
-<<<<<<< HEAD
     return render_template("home.html")
-=======
-return render_template("home.html")
->>>>>>> app-back-end
+
 
 if __name__ == '__main__':
     app.run(debug=True)
