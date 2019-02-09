@@ -1,16 +1,103 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Skin Cancer Analysis</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+{% extends 'layout.html' %}
 
-  </head>
-  <body>
-    <p> <strong>Skin Cancer Analysis</strong> </p>
+{% block body %}
+<div class="container-fluid">
+    <div class="row"><!--Body Content-->
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-  </body>
-</html>
+        <div class="col-md-7"><!-- MAIN CONTENT -->
+          <div class="container-fluid" id="main">
+            <h2>Enter Your Information Here!</h2>
+
+            <div class = "container-fluid" id="img_upload">
+            <p><img id="output" width="200" /></p>
+
+
+            <form method=post enctype=multipart/form-data>
+              <p><input type=file name=file accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
+              <button type="button" class="btn btn-custom"><label class="image-sub" for="file" style="cursor: pointer;">Select An Image</label></button>
+              <p><input type=submit value=Upload></p>
+            </form>
+          </div>
+
+            <!-- <script>
+            var loadFile = function(event) {
+            	var image = document.getElementById('output');
+            	image.src = URL.createObjectURL(event.target.files[0]);
+            };
+            </script> -->
+  <p>
+  <div class= "container-fluid" id= "form">
+  <form>
+    <div class= "form-row">
+    <div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+  <label class="form-check-label" for="inlineCheckbox1">Male</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+  <label class="form-check-label" for="inlineCheckbox2">Female</label>
+</div>
+    <div class="form-group col-md-3">
+      <label class="title" for="inputState">Location on Body</label>
+      <select id="inputState" class="form-control">
+        <option selected>Abdomen</option>
+        <option>Acral</option>
+        <option>Back</option>
+        <option>Chest</option>
+        <option>Ear</option>
+        <option>Face</option>
+        <option>Foot</option>
+        <option>Genital</option>
+        <option>Hand</option>
+        <option>Lower Extremity</option>
+        <option>Neck</option>
+        <option>Scalp</option>
+        <option>Trunk</option>
+        <option>Unknown</option>
+        <option>Upper Extremity</option>
+      </select>
+    </div>
+    <div class="form-group col-md-3">
+      <label class="title" for="inputState">Age Range</label>
+      <select id="inputState" class="form-control">
+        <option selected>0-18</option>
+        <option>19-44</option>
+        <option>45-64</option>
+        <option>65+</option>
+      </select>
+    </div>
+  <input type="submit" class="btn btn-custom"></button>
+</div>
+</form>
+</p>
+</div>
+
+          </div>
+        </div><!--END MAIN CONTENT -->
+
+        <div class="col-md-5"><!-- SIDE BAR -->
+          <div class ="container-fluid" id="visual">
+          <h2>Additional Info</h2>
+
+          <div class = "row">
+            <table class="table text-left">
+              <tbody>
+                <tr>
+                  <td> <strong>Our model predicts:</strong> </td>
+                  <td> {{results}} </td>
+                </tr>
+                <tr>
+                  <td> <strong>Find more info here:</strong> </td>
+                  <td> variable </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          </div>
+
+        </div><!-- END SIDE BAR -->
+      </div>
+
+    </div><!-- End Body Content -->
+</div>
+{% endblock %}
