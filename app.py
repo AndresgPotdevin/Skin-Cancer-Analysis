@@ -1,12 +1,17 @@
 import os
 from flask import Flask, request, jsonify, render_template
+from werkzeug.utils import secure_filename
 import numpy as np
 import keras
 from keras.preprocessing import image
 from keras import backend as K
 
+
+UPLOAD_FOLDER = 'uploads'
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
+
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = 'uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 model = None
 graph = None
@@ -39,6 +44,7 @@ def predict(image_path):
 def upload_file():
 
     data = {"success": False}
+    results = None
 
     if request.method == 'POST':
         print(request)
@@ -54,19 +60,21 @@ def upload_file():
 
             image_size = (200, 200)
             predictions = predict(filepath)
+            # jsonify([int(p) for p in predictions])
+            results = [int(p) for p in predictions]
 
-            return jsonify([int(p) for p in predictions])
-    #return '''
-    #<!doctype html>
-    #<title>Upload new File</title>
-    #<h1>Upload new File</h1>
-    #<form method=post enctype=multipart/form-data>
-      #<p><input type=file name=file>
-         #<input type=submit value=Upload>
-    #</form>
-    #'''
+            return render_template("home.html", results=results)
+    # return '''
+    # <!doctype html>
+    # <title>Upload new File</title>
+    # <h1>Upload new File</h1>
+    # <form method=post enctype=multipart/form-data>
+      # <p><input type=file name=file>
+         # <input type=submit value=Upload>
+    # </form>
+    # '''
 
-    return render_template("home.html")
+    return render_template("home.html", results=results)
 
 
 if __name__ == '__main__':
