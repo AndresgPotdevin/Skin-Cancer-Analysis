@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, url_for
 from werkzeug.utils import secure_filename
 import numpy as np
 import keras
@@ -24,9 +24,6 @@ def load_model():
     graph = K.get_session().graph
 
 
-dx = ['akiec', 'bcc', 'bkl', 'df', 'mel', 'nv', 'vasc']
-
-
 def predict(image_path):
     K.clear_session()
     model = keras.models.load_model('static/models/sklesion_img.h5')
@@ -36,15 +33,37 @@ def predict(image_path):
     x = image.img_to_array(img)
     x = np.expand_dims(x, axis=0)
     predictions = list(model.predict(x)[0])
-
     return predictions
+
+
+dx = ['akiec', 'bcc', 'bkl', 'df', 'mel', 'nv', 'vasc']
+diagnoses = ["Bowen's Disease", "Basal Cell Carcinoma", "Benign Keratosis-like Lesion",
+             "Dermatofibroma", "Melanoma", "Melanocytic Nevi", "Vascular Lesions"]
+urls = ['https://www.webmd.com/cancer/what-is-bowens-disease#1',
+        'https://www.webmd.com/melanoma-skin-cancer/basal-cell-carcinoma#1',
+        'https://www.webmd.com/skin-problems-and-treatments/keratosis-pilaris#1',
+        'https://www.webmd.com/skin-problems-and-treatments/picture-of-dermatofibroma',
+        'https://www.webmd.com/melanoma-skin-cancer/default.htm',
+        'https://emedicine.medscape.com/article/1058445-overview',
+        'https://www.webmd.com/skin-problems-and-treatments/picture-of-vascular-malformations-hand']
+
+
+def predictdx(predictions):
+    """Read in list of confidence and return tuple of diagnosis and confidence"""
+    ibest = predictions.index(max(predictions))
+    x = diagnoses[ibest]
+    y = '{:.0%}'.format(predictions[ibest])
+    z = urls[ibest]
+    return x, y, z
 
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
 
     data = {"success": False}
-    results = None
+    diagnosis = None
+    confidence = None
+    info = print(url_for('upload_file'))
 
     if request.method == 'POST':
         print(request)
@@ -61,20 +80,13 @@ def upload_file():
             image_size = (200, 200)
             predictions = predict(filepath)
             # jsonify([int(p) for p in predictions])
-            results = [int(p) for p in predictions]
+            # results = [int(p) for p in predictions]
 
-            return render_template("home.html", results=results)
-    # return '''
-    # <!doctype html>
-    # <title>Upload new File</title>
-    # <h1>Upload new File</h1>
-    # <form method=post enctype=multipart/form-data>
-      # <p><input type=file name=file>
-         # <input type=submit value=Upload>
-    # </form>
-    # '''
+            diagnosis, confidence, info = predictdx(predictions)
 
-    return render_template("home.html", results=results)
+            return render_template("home.html", diagnosis=diagnosis, confidence=confidence, info=info)
+
+    return render_template("home.html", diagnosis=diagnosis, confidence=confidence, info=info)
 
 
 if __name__ == '__main__':
