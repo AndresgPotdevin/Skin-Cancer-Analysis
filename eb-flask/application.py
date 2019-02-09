@@ -5,6 +5,9 @@ import numpy as np
 import keras
 from keras.preprocessing import image
 from keras import backend as K
+from flask.ext.sqlalchemy import SQLAlchemy
+
+
 
 
 UPLOAD_FOLDER = 'uploads'
@@ -12,6 +15,8 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 application = Flask(__name__)
 application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://meghana95:awsMySQLmeg95@aaeybycoop6ulm.cfsmu6vnshf2.us-east-2.rds.amazonaws.com:3306/aaeybycoop6ulm'
+db = SQLAlchemy(application)
 
 model = None
 graph = None
