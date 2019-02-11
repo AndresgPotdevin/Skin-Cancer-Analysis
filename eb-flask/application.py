@@ -7,7 +7,7 @@ import keras
 from keras.preprocessing import image
 from keras import backend as K
 # please keep this import below. needed for db connection
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
