@@ -1,3 +1,4 @@
+#Skin Cancer Model Version 1.0.3
 import os
 from flask import Flask, request, jsonify, render_template, url_for
 from werkzeug.utils import secure_filename
