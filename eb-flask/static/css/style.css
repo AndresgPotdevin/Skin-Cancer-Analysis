@@ -32,7 +32,8 @@
 }
 
 img {
-  opacity: .7;
+  align-items: center;
+  cursor: pointer;
 }
 
 .dropdown-item {
@@ -63,6 +64,7 @@ body
 }
 
 #main {
+  align-items: center;
   background-color: #f8f9fa;
   padding-bottom: 25px;
   padding-left: 20px;
@@ -130,6 +132,15 @@ h2 {
   text-align: center;
 }
 
+
+
+.visualizations {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom:15px;
+}
+
 .btn .btn-custom {
   background-color: #82ad9b!important;
 
@@ -147,6 +158,7 @@ h2 {
 }
 
 input[type=submit] {
+  white-space: normal;
   margin-top: 15px;
   background-color: #82ad9b!important;
   font-size: large;
@@ -169,7 +181,7 @@ input[type=submit] {
 
 }
 
-img{
+#avatar{
   border-radius: 50%;
   align-items: center;
   cursor: pointer;
@@ -181,6 +193,10 @@ padding-top: 5px;
 padding-bottom: 5px;
 padding-left: 5px;
 padding-right: 5px;
+}
+
+.col-md-7{
+  align-items: center;
 }
 
 hvrbox,

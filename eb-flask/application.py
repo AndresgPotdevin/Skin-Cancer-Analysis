@@ -93,6 +93,9 @@ def upload_file():
 
     return render_template("home.html", diagnosis=diagnosis, confidence=confidence, info=info)
 
+@application.route('/analysis')
+def analysis():
+    return render_template("analysis.html")
 
 if __name__ == '__main__':
     application.run(debug=True)
