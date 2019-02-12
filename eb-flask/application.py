@@ -15,8 +15,8 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 application = Flask(__name__)
 application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # please do not remove. connection to aws database instance
-application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://meghana95:awsMySQLmeg95@aaeybycoop6ulm.cfsmu6vnshf2.us-east-2.rds.amazonaws.com:3306/aaeybycoop6ulm'
-db = SQLAlchemy(application)
+# # application.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://meghana95:awsMySQLmeg95@aaeybycoop6ulm.cfsmu6vnshf2.us-east-2.rds.amazonaws.com:3306/aaeybycoop6ulm'
+# db = SQLAlchemy(application)
 
 model = None
 graph = None
@@ -92,6 +92,8 @@ def upload_file():
             return render_template("home.html", diagnosis=diagnosis, confidence=confidence, info=info)
 
     return render_template("home.html", diagnosis=diagnosis, confidence=confidence, info=info)
+
+
 
 @application.route('/analysis')
 def analysis():
