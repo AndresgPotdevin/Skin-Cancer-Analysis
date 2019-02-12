@@ -9,7 +9,7 @@
             <h2>Enter Your Information Here!</h2>
 
             <div class = "container-fluid" id="img_upload">
-            <p><img id="output" width="200" /></p>
+            <p><img id="output" width="200"></p>
 
 
             <form method=post enctype=multipart/form-data>
@@ -60,7 +60,7 @@
         <option>65+</option>
       </select>
     </div>
-  <input type="submit" class="btn btn-custom"></button>
+    <input type="submit" class="btn btn-custom"></button>
 </div>
 </form>
 </p>
@@ -71,7 +71,7 @@
 
         <div class="col-md-5"><!-- SIDE BAR -->
           <div class ="container-fluid" id="visual">
-          <h2>Additional Info</h2>
+          <h2>Diagnosis</h2>
 
           <div class = "row">
             <table class="table text-left">
@@ -79,14 +79,20 @@
                 <tr>
                   <td> <strong>Our model predicts:</strong> </td>
                   <td> {{diagnosis}} </td>
-                  <td> {{confidence}} </td>
+                  <td> {{confidence}} Confidence </td>
                 </tr>
                 <tr>
-                  <td> <a href="{{info}}"> <strong>Info</strong> </a></td>
+                  <td> <a href="{{info}}" target="_blank"> <strong>Click here for more info</strong> </a></td>
                 </tr>
               </tbody>
             </table>
           </div>
+          <div class="container-fluid">
+            <div class="alert alert-danger" role="alert">
+              Please note: This diagnosis has no basis in actual medical science and a doctor should always be consulted.
+            </div>
+          </div>
+
           </div>
 
         </div><!-- END SIDE BAR -->

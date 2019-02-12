@@ -63,7 +63,7 @@ def upload_file():
     data = {"success": False}
     diagnosis = None
     confidence = None
-    info = print(url_for('upload_file'))
+    info = url_for('upload_file')
 
     if request.method == 'POST':
         print(request)
@@ -88,6 +88,9 @@ def upload_file():
 
     return render_template("home.html", diagnosis=diagnosis, confidence=confidence, info=info)
 
+@app.route('/analysis')
+def analysis():
+    return render_template("analysis.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
